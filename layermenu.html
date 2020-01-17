@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>弹出层导航 - 何问起</title><base target="_blank" />
+
+<link type="text/css" href="http://hovertree.com/texiao/layer/3/css/index.css" rel="stylesheet">
+<script type="text/javascript" src="http://down.hovertree.com/jquery/jquery-1.12.3.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+function anim(duration){
+$('#hovertreemin').animate(
+{height: 'toggle'},
+{duration: duration}
+);
+}
+$('#hover'+'treeclose').on("mouseover",function() {
+$('#hov'+'ertreeminbar').hide();
+anim(60);
+});
+
+$('#hover'+'treemin').on("click", function () {
+anim(60);
+$('#hovertreeminbar').show();
+})
+});
+</script>
+
+</head>
+
+<body>
+
+<div class="hovertreebj"><img src="http://hovertree.com/hvtimg/bjafje/7o1qq4ge.gif" /></div>
+
+<div id="hovertreeminbar"><a id="hovertreeclose" target="_self" href="javascript:;"><img src="http://hovertree.com/texiao/layer/3/images/wd02.png" /></a></div>
+
+<div id="hovertreemin" style="display:none;position:absolute;top:0;right:0px;">
+<div class="box-nav-bj"><img style="right:0px; top:0px;" src="http://hovertree.com/texiao/layer/3/images/wd06.png" /></div>
+<ul class="box-nav">
+<li><a href="http://hovertree.com/about/">烟火</a></li>
+<li><a href="http://hovertree.com/menu/webfront/">水滴</a></li>
+<li><a href="http://hovertree.com/h/bjaf/l3c6nm7b.htm">火焰</a></li>
+<li><a href="http://hovertree.com/menu/zixun/">彩带</a></li>
+<li><a href="http://hovertree.com/h/bjaf/rnqpxtsq.htm">新闻资讯</a></li>
+<li><a href="http://hovertree.com/h/bjaf/meihua.htm">联系我们</a></li>
+</ul>
+<img src="http://hovertree.com/texiao/layer/3/images/wd07.png" alt="丝带"/>
+<div class="box-phone">
+<p>公司主页：</p>
+<p>hwq2.com</p>
+</div>
+</div>
+
+<div class="box-dibu">
+<div class="box-dibu1">
+<p>网站引导页</p>
+<p>何问起，分享网页特效，前端知识，题库代码等。<a href="http://hovertree.com/h/bjaf/yindaoye.htm">原文</a> <a href="http://hovertree.com">首页</a> <a href="http://hovertree.com/texiao/">特效</a></p>
+</div>
+<div class="box-dibu2">
+<a href="http://hovertree.com/map/"><img src="http://hovertree.com/texiao/layer/3/images/wd04.png" /></a>
+<a href="http://hovertree.com/about/"><img src="http://hovertree.com/texiao/layer/3/images/wd05.png" /></a>
+</div>
+</div>
+
+</body>
+</html>

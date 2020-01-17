@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>根目录</title>
+</head>
+
+<style>
+
+    .htmleaf-demo span {
+        background: #1d7db1;
+        color: #fff;
+    }
+    .htmleaf-demo span:hover {
+        opacity: 0.6;
+    }
+    .htmleaf-demo  span{
+    display: inline-block;
+    margin: 0.5em;
+    padding: 0.6em 1em;
+    border: 3px solid #fff;
+    font-weight: 700;
+    }
+
+    .main_left {
+        width: 100%;
+        background: #66677c;
+        cursor: pointer;
+    }
+</style>
+<body>
+<!-- 左侧导航 -->
+        <div class="main_left htmleaf-demo" style="height:10%">
+                <span>样式选择</span>
+                 <span data-src="./colorbar.html">首页</span>
+                <span data-src="./firemouse.html" disabled="true">火焰</span>
+                <span data-src="./flowparticle.html">流动的粒子</span>
+                <span data-src="./fireworks.html">烟火</span>
+        </div>
+
+<!-- 右侧内容 -->
+        <div class="main_right" style="height:90%">
+            <iframe frameborder="0" scrolling="yes" style="width:100%;height:100%" src="./colorbar.html" id="aa" ></iframe>
+        </div>
+
+</body>
+<!--<script type="text/javascript" src="http://down.hovertree.com/jquery/jquery-1.12.3.min.js"></script>-->
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript">
+        $(function(){
+            $(".main_left span").on("click",function(){
+                var address =$(this).attr("data-src");
+                $("iframe").attr("src",address);
+            });
+        });
+</script>
+</html>
