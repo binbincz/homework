@@ -1,0 +1,442 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>HTML5 Canvas火焰跟随鼠标</title>
+    <link href="./css/font.css" type="text/css" rel="stylesheet"/>
+    <!--<link href="css/colorbar.css" type="text/css" rel="stylesheet"/>-->
+    <style>
+        /*html, body {*/
+        /*margin: 0;*/
+        /*padding: 0;*/
+        /*height: 100%;*/
+        /*}*/
+        html, body {
+            margin: 0;
+            padding: 0;
+            font: 16px/1.4 'Lato', sans-serif;
+            color: #fefeff;
+            -webkit-font-smoothing: antialiased;
+            font-smoothing: antialiased;
+        }
+
+        body {
+            background: rgb(8, 5, 16);
+            overflow: hidden;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        h1 {
+            font: 2.75em 'Cinzel', serif;
+            font-weight: 400;
+            letter-spacing: 0.35em;
+            text-shadow: 0 0 25px rgba(254, 254, 255, 0.85);
+        }
+
+        h2 {
+            font: 1.45em 'Cinzel', serif;
+            font-weight: 400;
+            letter-spacing: 0.5em;
+            text-shadow: 0 0 25px rgba(254, 254, 255, 0.85);
+            text-transform: lowercase;
+        }
+
+        #hovertreecontainer {
+            display: table;
+            position: absolute;
+            z-index: 11;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            cursor: auto;
+            left: 15px;
+        }
+
+        #hovertreecontainer > div {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        #hovertreecontainer p {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            bottom: 25px;
+            font-size: 0.8em;
+            letter-spacing: 0.1em;
+            font-weight: 300;
+            color: #76747a;
+            -webkit-font-smoothing: subpixel-antialiased;
+            font-smoothing: subpixel-antialiased;
+        }
+
+        #hovertreecontainer p strong {
+            color: #b3abc5;
+            font-size: 5em;
+        }
+
+        #hovertreecontainer p span {
+            font-size: 0.75em;
+            padding: 0 2px;
+        }
+
+        #fire {
+            position: absolute;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: none;
+        }
+
+
+        .dg.ac {
+            z-index: 100 !important;
+        }
+
+        #hovertreecontainer div p strong a {
+            color: #999;
+            font-size: 0.5em;
+        }
+
+        body, td, th {
+            font-family: Lato, sans-serif;
+        }
+
+    </style>
+</head>
+<body>
+<div class="include" file="./information.html"></div>
+<canvas id="fire">
+</canvas>
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script>
+    //2.***.html中放入内容，用html格式仅仅因为会有编辑器的书写辅助。。
+    //3.代码：
+    $(".include").each(function () {
+        if (!!$(this).attr("file")) {
+            var $includeObj = $(this);
+            $(this).load($(this).attr("file"), function (html) {
+                $includeObj.after(html).remove(); //加载的文件内容写入到当前标签后面并移除当前标签
+            })
+        }
+    });
+
+    var Fire = function () {
+        this.canvas = document.getElementById('fire');
+        this.c = document.getElementById('canvasContainer');
+        this.ctx = this.canvas.getContext('2d');
+        this.canvas.height = window.innerHeight;
+        this.canvas.width = window.innerWidth;
+
+        this.aFires = [];
+        this.aSpark = [];
+        this.aSpark2 = [];
+
+        this.mouse = {
+            x: this.canvas.width * .5,
+            y: this.canvas.height * .75,
+        }
+        this.init();
+
+    }
+    Fire.prototype.init = function () {
+
+        window.addEventListener('mousemove', this.updateMouse.bind(this), false);
+    }
+
+    Fire.prototype.run = function () {
+
+        this.update();
+        this.draw();
+        console.log("mouseX is "+this.mouse.x+" mouseY is "+this.mouse.y)
+        if (this.bRuning)
+            requestAnimationFrame(this.run.bind(this));
+
+    }
+    Fire.prototype.start = function () {
+
+        this.bRuning = true;
+        this.run();
+
+    }
+    Fire.prototype.stop = function () {
+
+        this.bRuning = false;
+
+    }
+
+    Fire.prototype.update = function () {
+
+        this.aFires.push(new Flame(this.mouse));
+        this.aSpark.push(new Spark(this.mouse));
+        this.aSpark2.push(new Spark(this.mouse));
+
+
+        for (var i = this.aFires.length - 1; i >= 0; i--) {
+
+            if (this.aFires[i].alive)
+                this.aFires[i].update();
+            else
+                this.aFires.splice(i, 1);
+
+        }
+
+        for (var i = this.aSpark.length - 1; i >= 0; i--) {
+
+            if (this.aSpark[i].alive)
+                this.aSpark[i].update();
+            else
+                this.aSpark.splice(i, 1);
+
+        }
+
+
+        for (var i = this.aSpark2.length - 1; i >= 0; i--) {
+
+            if (this.aSpark2[i].alive)
+                this.aSpark2[i].update();
+            else
+                this.aSpark2.splice(i, 1);
+
+        }
+
+    }
+
+    Fire.prototype.draw = function () {
+
+        this.ctx.globalCompositeOperation = "source-over";
+        this.ctx.fillStyle = "rgba( 15, 5, 2, 1 )";
+        this.ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+
+        this.grd = this.ctx.createRadialGradient(this.mouse.x, this.mouse.y - 200, 200, this.mouse.x, this.mouse.y - 100, 0);
+        this.grd.addColorStop(0, "rgb( 15, 5, 2 )");
+        this.grd.addColorStop(1, "rgb( 30, 10, 2 )");
+        this.ctx.beginPath();
+        this.ctx.arc(this.mouse.x, this.mouse.y - 100, 200, 0, 2 * Math.PI);
+        this.ctx.fillStyle = this.grd;
+        this.ctx.fill();
+
+
+        this.ctx.font = "15em Amatic SC";
+        this.ctx.textAlign = "center";
+        this.ctx.strokeStyle = "rgb(50, 20, 0)";
+        this.ctx.fillStyle = "rgb(120, 10, 0)";
+        this.ctx.lineWidth = 2;
+        this.ctx.strokeText("Fire", this.canvas.width / 2, this.canvas.height * .72);
+        this.ctx.fillText("Fire", this.canvas.width / 2, this.canvas.height * .72);
+
+
+        this.ctx.globalCompositeOperation = "overlay";//or lighter or soft-light
+
+        for (var i = this.aFires.length - 1; i >= 0; i--) {
+
+            this.aFires[i].draw(this.ctx);
+
+        }
+
+        this.ctx.globalCompositeOperation = "soft-light";//"soft-light";//"color-dodge";
+
+        for (var i = this.aSpark.length - 1; i >= 0; i--) {
+
+            if ((i % 2) === 0)
+                this.aSpark[i].draw(this.ctx);
+
+        }
+
+
+        this.ctx.globalCompositeOperation = "color-dodge";//"soft-light";//"color-dodge";
+
+        for (var i = this.aSpark2.length - 1; i >= 0; i--) {
+
+            this.aSpark2[i].draw(this.ctx);
+
+        }
+    }
+
+    Fire.prototype.updateMouse = function (e) {
+
+        this.mouse.x = e.clientX;
+        this.mouse.y = e.clientY;
+
+        //this.aFires.push( new Flame( this.mouse ) );
+    }
+
+
+
+    var Flame = function (mouse) {
+
+        this.cx = mouse.x;
+        this.cy = mouse.y;
+        this.x = rand(this.cx - 25, this.cx + 25);
+        this.y = rand(this.cy - 5, this.cy + 5);
+        this.vy = rand(1, 3);
+        this.vx = rand(-1, 1);
+        this.r = rand(20, 30);
+        this.life = rand(3, 6);
+        this.alive = true;
+        this.c = {
+
+            h: Math.floor(rand(2, 40)),
+            s: 100,
+            l: rand(80, 100),
+            a: 0,
+            ta: rand(0.8, 0.9)
+
+        }
+
+
+    }
+    Flame.prototype.update = function () {
+
+        this.y -= this.vy;
+        this.vy += 0.05;
+
+        this.x += this.vx;
+
+        if (this.x < this.cx)
+            this.vx += 0.1;
+        else
+            this.vx -= 0.1;
+
+
+        if (this.r > 0)
+            this.r -= 0.1;
+
+        if (this.r <= 0)
+            this.r = 0;
+
+
+        this.life -= 0.15;
+
+        if (this.life <= 0) {
+
+            this.c.a -= 0.05;
+
+            if (this.c.a <= 0)
+                this.alive = false;
+
+        } else if (this.life > 0 && this.c.a < this.c.ta) {
+
+            this.c.a += .08;
+
+        }
+
+    }
+    Flame.prototype.draw = function (ctx) {
+
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r * 3, 0, 2 * Math.PI);
+        ctx.fillStyle = "hsla( " + this.c.h + ", " + this.c.s + "%, " + this.c.l + "%, " + (this.c.a / 20) + ")";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+        ctx.fillStyle = "hsla( " + this.c.h + ", " + this.c.s + "%, " + this.c.l + "%, " + this.c.a + ")";
+        ctx.fill();
+
+    }
+
+
+    var Spark = function (mouse) {
+
+        this.cx = mouse.x;
+        this.cy = mouse.y;
+        this.x = rand(this.cx - 40, this.cx + 40);
+        this.y = rand(this.cy, this.cy + 5);
+        this.lx = this.x;
+        this.ly = this.y;
+        this.vy = rand(1, 3);
+        this.vx = rand(-4, 4);
+        this.r = rand(0, 1);
+        this.life = rand(4, 5);
+        this.alive = true;
+        this.c = {
+
+            h: Math.floor(rand(2, 40)),
+            s: 100,
+            l: rand(40, 100),
+            a: rand(0.8, 0.9)
+
+        }
+
+    }
+    Spark.prototype.update = function () {
+
+        this.lx = this.x;
+        this.ly = this.y;
+
+        this.y -= this.vy;
+        this.x += this.vx;
+
+        if (this.x < this.cx)
+            this.vx += 0.2;
+        else
+            this.vx -= 0.2;
+
+        this.vy += 0.08;
+        this.life -= 0.1;
+
+        if (this.life <= 0) {
+
+            this.c.a -= 0.05;
+
+            if (this.c.a <= 0)
+                this.alive = false;
+
+        }
+
+    }
+    Spark.prototype.draw = function (ctx) {
+
+        ctx.beginPath();
+        ctx.moveTo(this.lx, this.ly);
+        ctx.lineTo(this.x, this.y);
+        ctx.strokeStyle = "hsla( " + this.c.h + ", " + this.c.s + "%, " + this.c.l + "%, " + (this.c.a / 2) + ")";
+        ctx.lineWidth = this.r * 2;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.moveTo(this.lx, this.ly);
+        ctx.lineTo(this.x, this.y);
+        ctx.strokeStyle = "hsla( " + this.c.h + ", " + this.c.s + "%, " + this.c.l + "%, " + this.c.a + ")";
+        ctx.lineWidth = this.r;
+        ctx.stroke();
+        ctx.closePath();
+
+    }
+
+    rand = function (min, max) {
+        return Math.random() * (max - min) + min;
+    };
+    onresize = function () {
+        oCanvas.canvas.width = window.innerWidth;
+        oCanvas.canvas.height = window.innerHeight;
+    };
+
+
+    var oCanvas;
+    init = function () {
+
+        oCanvas = new Fire();
+        oCanvas.start();
+    }
+
+
+
+    window.onload = init;
+
+
+
+</script>
+
+</body>
+</html>

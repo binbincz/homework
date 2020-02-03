@@ -1,19 +1,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>根目录</title>
+    <title>课程设计</title>
 </head>
-
 <style>
-
-    .htmleaf-demo span {
-        background: #1d7db1;
+    .htmleaf-demo span,em{
+        background:#07040e;
         color: #fff;
     }
     .htmleaf-demo span:hover {
         opacity: 0.6;
+
     }
-    .htmleaf-demo  span{
+    .htmleaf-demo  span,em{
     display: inline-block;
     margin: 0.5em;
     padding: 0.6em 1em;
@@ -23,18 +22,20 @@
 
     .main_left {
         width: 100%;
-        background: #66677c;
+        background: #07040e;
         cursor: pointer;
     }
 </style>
 <body>
 <!-- 左侧导航 -->
         <div class="main_left htmleaf-demo" style="height:10%">
-                <span>样式选择</span>
-                 <span data-src="./colorbar.html">首页</span>
-                <span data-src="./firemouse.html" disabled="true">火焰</span>
-                <span data-src="./flowparticle.html">流动的粒子</span>
-                <span data-src="./fireworks.html">烟火</span>
+                <em>样式选择</em>
+                 <span data-src="./colorbar.html" >首页</span>
+                 <span data-src="./flame.html" >火焰</span>
+                 <span data-src="./colorflame.html" >彩色火焰</span>
+                 <span data-src="./flowparticle.html">流动的粒子</span>
+                 <span data-src="./fireworks.html">烟花</span>
+                 <span data-src="./functiondes.html">使用说明</span>
         </div>
 
 <!-- 右侧内容 -->
@@ -43,7 +44,6 @@
         </div>
 
 </body>
-<!--<script type="text/javascript" src="http://down.hovertree.com/jquery/jquery-1.12.3.min.js"></script>-->
 <script type="text/javascript" src="./js/jquery.min.js"></script>
 <script type="text/javascript">
         $(function(){
