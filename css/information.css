@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#informationcontainer {
+    display: table;
+    position: absolute;
+    z-index: 20;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    /*cursor: none;*/
+    left: 15px;
+}
+
+#informationcontainer > div {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#informationcontainer p {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 25px;
+    font-size: 0.8em;
+    letter-spacing: 0.1em;
+    font-weight: 300;
+    color: #76747a;
+    -webkit-font-smoothing: subpixel-antialiased;
+    font-smoothing: subpixel-antialiased;
+}
+
+#informationcontainer p strong {
+    color: #b3abc5;
+    font-size: 5em;
+}
+
+#informationcontainer p span {
+    font-size: 0.75em;
+    padding: 0 2px;
+}
+
+#informationcontainer div p strong a {
+    color: #999;
+    font-size: 0.5em;
+}
+
+h1 {
+    font: 2.75em 'Cinzel', serif;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-shadow: 0 0 25px rgba(254, 254, 255, 0.85);
+}
+
+h2 {
+    font: 1.45em 'Cinzel', serif;
+    font-weight: 400;
+    letter-spacing: 0.5em;
+    text-shadow: 0 0 25px rgba(254, 254, 255, 0.85);
+    text-transform: lowercase;
+}
+
+h1, h2 {
+    /*visibility: hidden;*/
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+h1.transition-in,
+h2.transition-in {
+    visibility: visible;
+}
+
+h1 [class^="letter"],
+h2 [class^="letter"] {
+    opacity: 0;
+}
+
+h1.transition-in [class^="letter"],
+h2.transition-in [class^="letter"] {
+    opacity: 1;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font: 16px/1.4 'Lato', sans-serif;
+    color: #fefeff;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+body {
+    background: rgb(8, 5, 16);
+    overflow: hidden;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

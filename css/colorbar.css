@@ -131,44 +131,6 @@ h1, h2 {
         opacity: 1;
     }
 
-#hovertreecontainer {
-    display: table;
-    position: absolute;
-    z-index: 20;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    /*cursor: none;*/
-    left: 15px;
-}
-
-    #hovertreecontainer > div {
-        display: table-cell;
-        vertical-align: middle;
-    }
-
-    #hovertreecontainer p {
-        position: absolute;
-        width: 100%;
-        left: 0;
-        bottom: 25px;
-        font-size: 0.8em;
-        letter-spacing: 0.1em;
-        font-weight: 300;
-        color: #76747a;
-        -webkit-font-smoothing: subpixel-antialiased;
-        font-smoothing: subpixel-antialiased;
-    }
-
-        #hovertreecontainer p strong {
-            color: #b3abc5;
-            font-size: 5em;
-        }
-
-        #hovertreecontainer p span {
-            font-size: 0.75em;
-            padding: 0 2px;
-        }
 
 #canvas {
     position: absolute;
@@ -191,10 +153,6 @@ h1, h2 {
     z-index: 100 !important;
 }
 
-#hovertreecontainer div p strong a {
-    color: #999;
-    font-size: 0.5em;
-}
 
 body, td, th {
     font-family: Lato, sans-serif;

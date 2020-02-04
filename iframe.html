@@ -3,42 +3,20 @@
     <meta charset="UTF-8">
     <title>课程设计</title>
 </head>
-<style>
-    .htmleaf-demo span,em{
-        background:#07040e;
-        color: #fff;
-    }
-    .htmleaf-demo span:hover {
-        opacity: 0.6;
-
-    }
-    .htmleaf-demo  span,em{
-    display: inline-block;
-    margin: 0.5em;
-    padding: 0.6em 1em;
-    border: 3px solid #fff;
-    font-weight: 700;
-    }
-
-    .main_left {
-        width: 100%;
-        background: #07040e;
-        cursor: pointer;
-    }
-</style>
+<link href="./css/iframe.css" type="text/css" rel="stylesheet">
 <body>
-<!-- 左侧导航 -->
+<!-- 上侧侧导航 -->
         <div class="main_left htmleaf-demo" style="height:10%">
-                <em>样式选择</em>
+                 <em>样式选择</em>
                  <span data-src="./colorbar.html" >首页</span>
                  <span data-src="./flame.html" >火焰</span>
                  <span data-src="./colorflame.html" >彩色火焰</span>
                  <span data-src="./flowparticle.html">流动的粒子</span>
                  <span data-src="./fireworks.html">烟花</span>
-                 <span data-src="./functiondes.html">使用说明</span>
+                 <!--<span data-src="./functiondes.html">使用说明</span>-->
         </div>
 
-<!-- 右侧内容 -->
+<!-- 下侧内容 -->
         <div class="main_right" style="height:90%">
             <iframe frameborder="0" scrolling="yes" style="width:100%;height:100%" src="./colorbar.html" id="aa" ></iframe>
         </div>
