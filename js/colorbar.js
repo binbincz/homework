@@ -87,6 +87,24 @@ var Stats = function() {
     }
 };
 
+    /*字的动态显示*/
+        function letters(id) {
+
+            var el = document.getElementById(id),
+                letters = el.innerHTML.replace('&amp;', '&').split(''),
+                heading = '';
+
+            for (var i = 0, n = letters.length, letter; i < n; i++) {
+                letter = letters[i].replace('&', '&amp');
+                heading += letter.trim() ? '<span class="letter-' + i + '">' + letter + '</span>' : '&nbsp;';
+            }
+
+            el.innerHTML = heading;
+            setTimeout(function () {
+                el.className = 'transition-in';
+            }, (Math.random() * 500) + 500);
+        }
+
 
     ;(function (window) {
         var ctx,
@@ -332,24 +350,6 @@ var Stats = function() {
             }
         }
 
-        /*字的动态显示*/
-        function letters(id) {
-
-            var el = document.getElementById(id),
-                letters = el.innerHTML.replace('&amp;', '&').split(''),
-                heading = '';
-
-            for (var i = 0, n = letters.length, letter; i < n; i++) {
-                letter = letters[i].replace('&', '&amp');
-                heading += letter.trim() ? '<span class="letter-' + i + '">' + letter + '</span>' : '&nbsp;';
-            }
-
-            el.innerHTML = heading;
-            setTimeout(function () {
-                el.className = 'transition-in';
-            }, (Math.random() * 500) + 500);
-        }
-
         function save() {
 
             if (!buffer) {
@@ -412,7 +412,7 @@ var Stats = function() {
             });
 
 
-            // letters('h1');
+             letters('h1');
 
             document.addEventListener('mousemove', init);
             document.addEventListener('touchstart', init);
