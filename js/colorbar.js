@@ -411,12 +411,6 @@ var Stats = function() {
                 offset: 285
             });
 
-
-            letters('h1');
-            letters('h2');
-            letters('h3');
-            letters('h4');
-            letters('h5');
             document.addEventListener('mousemove', init);
             document.addEventListener('touchstart', init);
             document.body.addEventListener('orientationchange', resize);
@@ -439,6 +433,12 @@ var Stats = function() {
                 settings.gui.add(settings, 'tension', 0.95, 0.999).onFinishChange(reset);
                 document.body.appendChild(ctx.stats.domElement);
             }
+
+            letters('h1');
+            letters('h2');
+            letters('h3');
+            letters('h4');
+            letters('h5');
         };
 
     })(window);
