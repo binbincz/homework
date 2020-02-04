@@ -90,26 +90,60 @@ h2 {
 }
 
 .letter-10 {
-    transition-delay: 2.2s;
+    transition-delay: 2.0s;
 }
 
 .letter-11 {
-    transition-delay: 2.4s;
+    transition-delay: 2.0s;
 }
 
 .letter-12 {
-    transition-delay: 2.6s;
+    transition-delay: 2.0s;
 }
 
 .letter-13 {
-    transition-delay: 2.8s;
+    transition-delay: 2.0s;
 }
 
-.letter-14 {
+.letter-14,
+.letter-15 ,
+.letter-16 ,
+.letter-17 ,
+.letter-18 ,
+.letter-19 ,
+.letter-20 ,
+.letter-21 ,
+.letter-22{
+    transition-delay: 2.0s;
+}
+/*
+.letter-15 {
     transition-delay: 3.0s;
 }
+.letter-16 {
+    transition-delay:3.0s;
+}
+.letter-17 {
+    transition-delay: 3.0s;
+}
+.letter-18 {
+    transition-delay: 3.0s;
+}
+.letter-19 {
+    transition-delay: 3.0s;
+}
+.letter-20 {
+    transition-delay: 3.0s;
+}
+.letter-21 {
+    transition-delay: 3.0s;
+}
+.letter-22 {
+    transition-delay: 3.0s;
+}
+*/
 
-h1, h2 {
+h1, h2,h3 {
     /*visibility: hidden;*/
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
@@ -117,17 +151,20 @@ h1, h2 {
 }
 
     h1.transition-in,
-    h2.transition-in {
+    h2.transition-in,
+    h3.transition-in{
         visibility: visible;
     }
 
     h1 [class^="letter"],
-    h2 [class^="letter"] {
+    h2 [class^="letter"],
+    h3 [class^="letter"]{
         opacity: 0;
     }
 
     h1.transition-in [class^="letter"],
-    h2.transition-in [class^="letter"] {
+    h2.transition-in [class^="letter"],
+    h3.transition-in [class^="letter"]{
         opacity: 1;
     }
 
