@@ -417,7 +417,6 @@ var Stats = function() {
             letters('h3');
             letters('h4');
             letters('h5');
-
             document.addEventListener('mousemove', init);
             document.addEventListener('touchstart', init);
             document.body.addEventListener('orientationchange', resize);
