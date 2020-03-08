@@ -5,8 +5,7 @@ var QT3_TAU = TAU - HALF_PI;
 var TO_RAD = PI / 180;
 var rand = function rand(n) {return n * random();};
 var randRange = function randRange(n) {return n - rand(2 * n);};
-var fadeIn = function fadeIn(t, m) {return t / m;};
-var fadeOut = function fadeOut(t, m) {return (m - t) / m;};
+
 var fadeInOut = function fadeInOut(t, m) {
 	var hm = 0.5 * m;
 	return abs((t + hm) % m - hm) / hm;
