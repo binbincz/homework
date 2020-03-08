@@ -125,7 +125,7 @@
                     ctx.beginPath();
                     ctx.moveTo(x, y);
 
-                    for (var i = 1, n = this.nodes.length ; i < n; i++) {
+                    for (var i = 1, n = this.nodes.length-2; i < n; i++) {
 
                         a = this.nodes[i];
                         b = this.nodes[i + 1];
@@ -134,7 +134,6 @@
                         // 绘制一条二次贝塞尔曲线：
                         ctx.quadraticCurveTo(a.x, a.y, x, y);
                     }
-
                     // 绘制出通过 moveTo() 和 quadraticCurveTo() 方法定义的路
                     ctx.stroke();
                     ctx.closePath();
